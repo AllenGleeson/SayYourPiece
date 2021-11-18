@@ -1,0 +1,99 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% block meta %}
+    {% endblock %}
+
+    {% block corecss %}
+    {% endblock %}
+
+    {% block extra_css %}
+    {% endblock %}
+
+    {% block corejs %}
+    {% endblock %}
+
+    <title>Say Your Piece</title>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-light navbar-expand-lg">
+            <div class="container-fluid">
+                <!-- Main navigation links -->
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+                    <ul class="nav_buttons navbar-nav mr-auto mb-2 mb-lg-0">
+                        <li class="nav-item rounded">
+                            <a class="nav-link text-center active" aria-current="page" href="{% url 'forum' %}">Forum</a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <ul class="navbar-nav mr-5 mb-2 mb-lg-0">
+                        <!-- Accounts. If logged in can view users profile. If not then gives option to register. -->
+                        <li class="list-inline-item dropdown nav-item rounded">
+                            <a class="text-black nav-link" href="#" id="user-options" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                <div class="text-center">
+                                    <i class="fas fa-user fa-lg"></i>
+                                    {% if request.user.is_authenticated %}
+                                    <p class="my-0 p-1">{{ request.user }}</p>
+                                    {% else %}
+                                    <p class="my-0 p-1">My Account</p>
+                                    {% endif %}
+                                </div>
+                            </a>
+                            <div class="dropdown-menu border-0" aria-labelledby="user-options">
+                                {% if request.user.is_authenticated %}
+                                {% if request.user.is_superuser %}
+                                <a href="#" class="dropdown-item">Product Management</a>
+                                {% endif %}
+                                <a href="#" class="dropdown-item">My Profile</a>
+                                <a href="#" class="dropdown-item">Logout</a>
+                                {% else %}
+                                <a href="#" class="dropdown-item">Register</a>
+                                <a href="#" class="dropdown-item">Login</a>
+                                {% endif %}
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </nav>
+    </header>
+
+    <div class="flex-wrapper">
+        <!-- Block for sites content -->
+        {% block content %}
+        {% endblock %}
+
+        <footer class="footer d-flex justify-content-around text-light p-3">
+            <p>foot</p>
+
+        </footer>
+    </div>
+
+
+
+    <!-- JS -->
+    {% block js %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
+        integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
+        crossorigin="anonymous"></script>
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+    {% endblock %}
+
+    {% block postloadjs %}
+    {% endblock %}
+
+</body>
+
+</html>

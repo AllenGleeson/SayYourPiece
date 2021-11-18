@@ -1,0 +1,26 @@
+{% load static %}
+
+
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'forum/css/forum.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+
+    <div class="row">
+        <!-- Creates the topics in the forum -->
+    
+        {% if True %}
+        <div class="col-sm-12 col-lg-9">
+            <p>Hello world</p>
+        </div> 
+
+        {% else %}
+        <!-- If no topics then displays this message -->
+        <h1>There are no topics on the forum. You'll see them soon! &#128512;</h1>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
